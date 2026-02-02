@@ -31,12 +31,11 @@ export default function SettingsPage() {
     setError('');
 
     try {
-      const { access_token } = await authApi.login(
+      const { token, user } = await authApi.login(
         loginData.username,
         loginData.password
       );
-      const userInfo = await authApi.getMe(access_token);
-      setAuth(access_token, userInfo);
+      setAuth(token, user);
       setLoginData({ username: '', password: '' });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
@@ -53,12 +52,11 @@ export default function SettingsPage() {
     try {
       await authApi.register(registerData);
       // Auto-login after registration
-      const { access_token } = await authApi.login(
+      const { token, user } = await authApi.login(
         registerData.username,
         registerData.password
       );
-      const userInfo = await authApi.getMe(access_token);
-      setAuth(access_token, userInfo);
+      setAuth(token, user);
       setRegisterData({ username: '', email: '', password: '' });
       setShowRegister(false);
     } catch (err) {
@@ -100,7 +98,7 @@ export default function SettingsPage() {
                 <div>
                   <p className="font-semibold text-lg">{user.username}</p>
                   <p className="text-nebula-400">{user.email}</p>
-                  {user.is_admin && (
+                  {user.role === 'admin' && (
                     <span className="text-xs bg-nebula-600 px-2 py-0.5 rounded">
                       Admin
                     </span>
@@ -260,13 +258,13 @@ export default function SettingsPage() {
             <div className="flex justify-between">
               <span className="text-nebula-400">API URL:</span>
               <code className="text-nebula-300">
-                {process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}
+                {process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}
               </code>
             </div>
             <div className="flex justify-between">
               <span className="text-nebula-400">WebSocket URL:</span>
               <code className="text-nebula-300">
-                {process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws'}
+                {process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080/ws'}
               </code>
             </div>
           </div>

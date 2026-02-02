@@ -19,7 +19,7 @@ export default function HomePage() {
     const fetchData = async () => {
       try {
         const [status, taskList, logList] = await Promise.all([
-          statusApi.status(),
+          statusApi.getStatus(),
           tasksApi.list(),
           logsApi.list({ limit: 20 }),
         ]);
@@ -38,7 +38,7 @@ export default function HomePage() {
     // Refresh status every 30 seconds
     const interval = setInterval(async () => {
       try {
-        const status = await statusApi.status();
+        const status = await statusApi.getStatus();
         setSystemStatus(status);
       } catch (error) {
         console.error('Failed to refresh status:', error);
@@ -48,7 +48,8 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [setSystemStatus, setTasks, setLogs]);
 
-  const formatUptime = (seconds: number) => {
+  const formatUptime = (seconds?: number) => {
+    if (seconds === undefined) return '-';
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     return `${hours}h ${minutes}m`;
@@ -81,7 +82,7 @@ export default function HomePage() {
               value={systemStatus?.status || 'Unknown'}
               icon="💚"
               status={
-                systemStatus?.status === 'healthy'
+                systemStatus?.status === 'online'
                   ? 'healthy'
                   : systemStatus?.status === 'degraded'
                   ? 'degraded'
@@ -90,9 +91,7 @@ export default function HomePage() {
             />
             <StatusCard
               title="Uptime"
-              value={
-                systemStatus ? formatUptime(systemStatus.uptime_seconds) : '-'
-              }
+              value={formatUptime(systemStatus?.uptime)}
               icon="⏱️"
             />
             <StatusCard
@@ -102,7 +101,7 @@ export default function HomePage() {
             />
             <StatusCard
               title="Pending Tasks"
-              value={systemStatus?.pending_tasks || 0}
+              value={systemStatus?.active_tasks || 0}
               icon="📋"
             />
           </div>

@@ -72,6 +72,7 @@ backend/.env
 # Logs
 logs/
 *.log
+logs_*.txt
 
 # Docker
 .docker/
@@ -88,3 +89,34 @@ coverage/
 tmp/
 temp/
 *.tmp
+
+# Secrets / local env
+.env
+.env.*
+*.bak_*
+*.broken_*
+
+# Local volumes / data
+postgres_data
+n8n_data
+
+# --- Node / Next.js ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+
+# --- Python ---
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.env.*

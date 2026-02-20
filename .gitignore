@@ -123,3 +123,9 @@ venv/
 
 # local backups
 /docker-compose.yml.bak.*
+
+# local junk
+/.nebulaops_backup/
+/Makefile
+/src/
+*.bak.*

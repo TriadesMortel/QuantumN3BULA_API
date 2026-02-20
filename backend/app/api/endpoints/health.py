@@ -29,6 +29,11 @@ async def ping():
     )
 
 
+@router.get("/health", response_model=StatusResponse)
+async def health(db: Session = Depends(get_db)):
+    """Alias for /status (compat)."""
+    return await status(db)
+
 @router.get("/status", response_model=StatusResponse)
 async def status(db: Session = Depends(get_db)):
     """System status endpoint - returns system health and metrics."""

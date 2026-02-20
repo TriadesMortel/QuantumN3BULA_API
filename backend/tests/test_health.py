@@ -15,12 +15,12 @@ def test_status(client):
     response = client.get("/api/status")
     assert response.status_code == 200
     data = response.json()
-    assert data["status"] in ["healthy", "degraded"]
+    assert data["status"] in ["online", "degraded"]
     assert "version" in data
-    assert "uptime_seconds" in data
+    assert "uptime" in data
     assert "database_connected" in data
     assert "active_agents" in data
-    assert "pending_tasks" in data
+    assert "active_tasks" in data
 
 
 def test_root(client):

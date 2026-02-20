@@ -58,7 +58,7 @@ def authenticated_client(client):
         "/api/auth/token",
         data={"username": "testuser", "password": "testpassword123"},
     )
-    token = response.json()["access_token"]
+    token = response.json()["token"]
 
     # Add auth header to client
     client.headers["Authorization"] = f"Bearer {token}"

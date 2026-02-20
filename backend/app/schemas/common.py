@@ -18,10 +18,10 @@ class StatusResponse(BaseModel):
 
     status: str
     version: str
-    uptime_seconds: float
+    uptime: float
     database_connected: bool
     active_agents: int
-    pending_tasks: int
+    active_tasks: int
     total_logs: int
 
 

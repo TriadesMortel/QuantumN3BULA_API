@@ -69,7 +69,7 @@ async def login(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
 
-    return Token(access_token=access_token)
+    return Token(token=access_token)
 
 
 @router.get("/me", response_model=UserResponse)

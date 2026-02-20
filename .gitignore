@@ -120,3 +120,6 @@ pnpm-debug.log*
 venv/
 .env
 .env.*
+
+# local backups
+/docker-compose.yml.bak.*

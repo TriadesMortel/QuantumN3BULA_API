@@ -51,7 +51,7 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql://quantum:${POSTGRES_PASSWORD:-quantum}@postgres:5432/quantumdb}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
-      # SECRET_KEY: ${SECRET_KEY}   # optionnel en local; en prod on le met
+      SECRET_KEY: ${SECRET_KEY}
     healthcheck:
       test: ["CMD-SHELL", "python3 -c \"import urllib.request,sys; r=urllib.request.urlopen('http://127.0.0.1:8000/docs',timeout=2); sys.exit(0 if 200<=getattr(r,'status',200)<400 else 1)\""]
       interval: 10s

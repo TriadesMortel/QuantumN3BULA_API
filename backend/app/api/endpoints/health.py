@@ -45,7 +45,7 @@ async def status(db: Session = Depends(get_db)):
     total_logs = db.query(Log).count() if db_connected else 0
 
     return StatusResponse(
-        status="healthy" if db_connected else "degraded",
+        status="online" if db_connected else "degraded",
         version=settings.APP_VERSION,
         uptime_seconds=time.time() - APP_START_TIME,
         database_connected=db_connected,

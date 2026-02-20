@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # CORS
-    CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://frontend:3000"]
+    CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://frontend:3000", "http://localhost:13000", "http://127.0.0.1:13000"]
 
 
 settings = Settings()

@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI(title="Quantum-N3BULA API", version="1.0.0")
+
+class CommandRequest(BaseModel):
+    command: str
 
 @app.get("/ping")
 def ping():
@@ -16,8 +20,8 @@ def status():
     }
 
 @app.post("/execute")
-def execute(command: dict):
-    return {"result": f"Executed: {command.get('command', '<none>')}"}
+def execute(request: CommandRequest):
+    return {"result": f"Executed: {request.command}"}
 
 @app.get("/logs")
 def logs():

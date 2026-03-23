@@ -6,7 +6,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import { useAppStore } from '@/lib/store';
 import type { Task, Log } from '@/lib/api';
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws';
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://127.0.0.1:18080/ws';
 
 interface TaskUpdateMessage {
   event: 'task_started' | 'task_completed' | 'task_failed';

@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useAppStore } from '@/lib/store';
-import { agentsApi } from '@/lib/api';
+import { agentsApi } from '@/lib/agentsApi';
 import AgentCard from '@/components/AgentCard';
 
 export default function AgentsPage() {
@@ -18,7 +18,7 @@ export default function AgentsPage() {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const agentList = await agentsApi.list();
+        const agentList = await agentsApi.getAgents();
         setAgents(agentList);
       } catch (error) {
         console.error('Failed to fetch agents:', error);

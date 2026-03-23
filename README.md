@@ -77,8 +77,8 @@ docker-compose up -d
 
 # Access the applications:
 # - Frontend: http://localhost:3000
-# - Backend API: http://localhost:8000
-# - API Docs: http://localhost:8000/docs
+# - Backend API: http://127.0.0.1:18080
+# - API Docs: http://127.0.0.1:18080/docs
 ```
 
 ### Option 2: Local Development
@@ -127,8 +127,8 @@ npm run dev
 ### Frontend Environment Variables
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Backend API URL |
-| `NEXT_PUBLIC_WS_URL` | `ws://localhost:8000/ws` | WebSocket URL |
+| `NEXT_PUBLIC_API_URL` | `http://127.0.0.1:18080` | Backend API URL |
+| `NEXT_PUBLIC_WS_URL` | `ws://127.0.0.1:18080/ws` | WebSocket URL |
 
 ## 📡 API Endpoints
 

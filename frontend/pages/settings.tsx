@@ -258,13 +258,13 @@ export default function SettingsPage() {
             <div className="flex justify-between">
               <span className="text-nebula-400">API URL:</span>
               <code className="text-nebula-300">
-                {process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}
+                {process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:18080'}
               </code>
             </div>
             <div className="flex justify-between">
               <span className="text-nebula-400">WebSocket URL:</span>
               <code className="text-nebula-300">
-                {process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080/ws'}
+                {process.env.NEXT_PUBLIC_WS_URL || 'ws://127.0.0.1:18080/ws'}
               </code>
             </div>
           </div>

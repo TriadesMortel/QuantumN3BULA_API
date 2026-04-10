@@ -7,7 +7,7 @@ ALLOWED_COMMANDS = {"status", "sync", "ping", "logs", "health"}
 
 
 class ExecuteRequest(BaseModel):
-    command: str = Field(..., min_length=1, max_length=64, pattern=r"^[a-zA-Z0-9_\-]+$")
+    command: str = Field(..., min_length=1, max_length=64, pattern=r"^[a-zA-Z0-9_]+$")
 
 
 @app.get("/ping")
@@ -26,11 +26,7 @@ def status():
 @app.post("/execute")
 def execute(request: ExecuteRequest):
     if request.command not in ALLOWED_COMMANDS:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Command '{request.command}' is not allowed. "
-                   f"Allowed commands: {', '.join(sorted(ALLOWED_COMMANDS))}",
-        )
+        raise HTTPException(status_code=400, detail="Invalid command.")
     return {"result": f"Executed: {request.command}"}
 
 @app.get("/logs")

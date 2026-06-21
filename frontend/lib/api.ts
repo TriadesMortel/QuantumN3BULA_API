@@ -73,8 +73,8 @@ export const tasksApi = {
     const now = new Date().toISOString();
     return {
       id: 'exec-' + Math.random().toString(36).substr(2, 9),
-      name: 'Command: ' + command,
-      title: 'Command: ' + command,
+      name: 'Task Action: ' + command,
+      title: 'Task Action: ' + command,
       command: command,
       status: 'running',
       priority: 'high',

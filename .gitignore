@@ -11,6 +11,10 @@ downloads/
 eggs/
 .eggs/
 lib/
+!frontend/lib/
+frontend/lib/*
+!frontend/lib/store.ts
+!frontend/lib/agentsApi.ts
 lib64/
 parts/
 sdist/

@@ -6,19 +6,31 @@ import warnings
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+_DEV_FALLBACK_SECRET: str = secrets.token_urlsafe(32)
+
+
+def _is_debug_mode() -> bool:
+    """Return whether local debug mode is enabled from environment."""
+    return os.getenv("DEBUG", "true").strip().lower() in {"1", "true", "yes", "on"}
+
 
 def _get_secret_key() -> str:
-    """Get secret key from environment or generate a warning."""
+    """Get SECRET_KEY from environment; allow temporary fallback only in debug."""
     key = os.getenv("SECRET_KEY")
-    if not key:
+    if key:
+        return key
+
+    if _is_debug_mode():
         warnings.warn(
-            "SECRET_KEY not set! Using a random key. "
-            "Set SECRET_KEY environment variable in production.",
+            "SECRET_KEY not set — using a temporary per-process key in DEBUG mode. "
+            "All JWTs will be invalidated on restart. "
+            "Set SECRET_KEY for a stable key.",
             UserWarning,
             stacklevel=2,
         )
-        return secrets.token_urlsafe(32)
-    return key
+        return _DEV_FALLBACK_SECRET
+
+    raise RuntimeError("SECRET_KEY environment variable must be set when DEBUG is false.")
 
 
 class Settings(BaseSettings):

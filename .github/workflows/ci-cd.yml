@@ -76,6 +76,10 @@ jobs:
       - name: Build
         run: npm run build
 
+  # Docker image publishing is opt-in.
+  # Set repository variable ENABLE_DOCKER_PUSH=true only when DockerHub secrets are configured:
+  # - DOCKERHUB_USERNAME
+  # - DOCKERHUB_TOKEN
   # Build and Push Docker Images
   docker-build:
     name: Build & Push Docker Images
@@ -84,7 +88,7 @@ jobs:
       contents: read
       packages: write
     needs: [backend-test, frontend-test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_DOCKER_PUSH == 'true'
 
     steps:
       - name: Checkout code

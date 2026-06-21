@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 26, 32, 87;
+  --background-end-rgb: 13, 16, 43;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(82, 120, 255, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(82, 120, 255, 0.7);
+}
+
+/* Terminal-like styling */
+.terminal {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.terminal-output {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Glow effects */
+.glow {
+  box-shadow: 0 0 20px rgba(82, 120, 255, 0.3);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(82, 120, 255, 0.5);
+}
+
+/* Status indicators */
+.status-active {
+  @apply bg-green-500;
+  animation: pulse 2s infinite;
+}
+
+.status-inactive {
+  @apply bg-gray-500;
+}
+
+.status-pending {
+  @apply bg-yellow-500;
+  animation: pulse 1s infinite;
+}
+
+.status-error {
+  @apply bg-red-500;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

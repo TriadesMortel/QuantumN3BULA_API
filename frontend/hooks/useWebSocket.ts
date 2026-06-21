@@ -28,7 +28,7 @@ export function useWebSocket() {
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setWsConnected, setLastEvent, updateTask, addLog } = useAppStore();
 
-  const connect = useCallback(() => {
+  const connect = useCallback(function connect() {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       return;
     }
